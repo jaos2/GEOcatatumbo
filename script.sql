@@ -1,23 +1,22 @@
 DROP SCHEMA IF EXISTS minas CASCADE;
 CREATE SCHEMA minas;
 
-
 CREATE TABLE minas.genero
 (
     genero_id   SERIAL PRIMARY KEY,
     tipo_genero VARCHAR(80) NOT NULL
 );
-
 CREATE TABLE minas.departamento
 (
-    cod_dep      SERIAL PRIMARY KEY,
-    departamento VARCHAR(80) NOT NULL
+    departamento_id SERIAL PRIMARY KEY,
+    cod_dep         VARCHAR(8),
+    departamento    VARCHAR(80) NOT NULL
 );
 CREATE TABLE minas.municipio
 (
     municipio_id     SERIAL PRIMARY KEY,
     nombre_municipio VARCHAR(80) NOT NULL,
-    cod_dep          INT REFERENCES minas.departamento (cod_dep) -- Referencia a la tabla departamento
+    departamento_id  INT --REFERENCES minas.departamento (departamento_id) -- Referencia a la tabla departamento
 );
 CREATE TABLE minas.zona
 (
@@ -25,28 +24,30 @@ CREATE TABLE minas.zona
     tipo_zona    VARCHAR(80) NOT NULL,
     municipio_id INT
 );
+
 CREATE TABLE minas.vereda
 (
     vereda_id     serial PRIMARY KEY,
     nombre_vereda VARCHAR(80) NOT NULL,
     zona_id       INT
 );
+
 CREATE TABLE minas.condicion
 (
-    condicion_id   serial PRIMARY KEY,
-    tipo_condicion VARCHAR(80) NOT NULL
+    condicion_id   SERIAL PRIMARY KEY,
+    tipo_condicion VARCHAR NOT NULL UNIQUE -- Asegúrate de que sea único si es necesario
 );
 CREATE TABLE minas.detonacion
 (
     id           SERIAL PRIMARY KEY,
-    ano          DATE,
+    ano          INTEGER,
     mes          INTEGER, -- Asegúrate de que sea INTEGER
     edad         INTEGER,
-    ocupacion    VARCHAR(100),
+    ocupacion    VARCHAR(80),
     y            DOUBLE PRECISION,
     x            DOUBLE PRECISION,
-    lugar_deto   VARCHAR(100),
-    actividad    VARCHAR(100),
+    lugar_deto   VARCHAR(80),
+    actividad    VARCHAR(80),
     x_cmt12      DOUBLE PRECISION,
     y_cmt12      DOUBLE PRECISION,
     geom         GEOMETRY(Point, 4326),
@@ -54,6 +55,7 @@ CREATE TABLE minas.detonacion
     condicion_id INT,
     genero_id    INT
 );
+
 
 
 

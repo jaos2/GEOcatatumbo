@@ -10,6 +10,7 @@ SET PGCLIENTENCODING=utf8
 
 @REM constraints
 psql -U postgres -d minas -f ./constraint/fk.sql
+psql -U postgres -d minas -f ./constraint/uk.sql
 
 @REM data
 psql -U postgres -d minas -f ./data/genero.sql
