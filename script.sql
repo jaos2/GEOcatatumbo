@@ -16,7 +16,8 @@ CREATE TABLE minas.municipio
 (
     municipio_id     SERIAL PRIMARY KEY,
     nombre_municipio VARCHAR(80) NOT NULL,
-    departamento_id  INT --REFERENCES minas.departamento (departamento_id) -- Referencia a la tabla departamento
+    departamento_id  INT,
+    cod_dep VARCHAR(8)
 );
 CREATE TABLE minas.zona
 (
