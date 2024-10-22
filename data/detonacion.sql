@@ -10,7 +10,8 @@ INSERT INTO minas.detonacion (ano,
                               y_cmt12,
                               geom,
                               vereda_id,
-                              condicion_id, genero_id)
+                              condicion_id,
+                              genero_id)
 SELECT EXTRACT(YEAR FROM CURRENT_DATE)  AS ano,
        EXTRACT(MONTH FROM CURRENT_DATE) AS mes,
        CASE
@@ -30,12 +31,12 @@ SELECT EXTRACT(YEAR FROM CURRENT_DATE)  AS ano,
        mp.actividad,
        CAST(mp.x_cmt12 AS DOUBLE PRECISION),
        CAST(mp.y_cmt12 AS DOUBLE PRECISION),
-       mp.geom,
+       ST_Transform(mp.geom, 4326)      AS geom, -- Transformar geom a SRID 4326
        v.vereda_id,
        c.condicion_id,
        g.genero_id
 FROM minas.minas_point mp
          LEFT JOIN minas.vereda v ON mp.vereda = v.nombre_vereda
          LEFT JOIN minas.condicion c ON mp.condicion = c.tipo_condicion
-         LEFT JOIN minas.genero g ON mp.genero = g.tipo_genero
+         LEFT JOIN minas.genero g ON mp.genero = g.genero
 WHERE mp.geom IS NOT NULL; -- Solo insertar si el punto geométrico es válido

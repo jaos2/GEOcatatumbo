@@ -6,6 +6,7 @@ ALTER TABLE minas.vereda
     ADD CONSTRAINT fk_zona_vereda FOREIGN KEY (zona_id)
         REFERENCES minas.zona (zona_id);
 
+--se crea la llave foranea de la tabla detonacion
 ALTER TABLE minas.detonacion
     ADD CONSTRAINT FK_vereda_detonacion FOREIGN KEY (vereda_id)
         REFERENCES minas.vereda (vereda_id);

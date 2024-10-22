@@ -2,7 +2,7 @@ ALTER TABLE minas.condicion
     ADD CONSTRAINT unique_tipo_condicion UNIQUE (tipo_condicion);
 
 ALTER TABLE minas.genero
-    ADD CONSTRAINT unique_tipo_genero UNIQUE (tipo_genero);
+    ADD CONSTRAINT unique_genero UNIQUE (genero);
 
 ALTER TABLE minas.vereda
     ADD CONSTRAINT unique_nombre_vereda UNIQUE (nombre_vereda);

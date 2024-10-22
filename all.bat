@@ -12,11 +12,9 @@ SET PGCLIENTENCODING=utf8
 psql -U postgres -d minas -f ./constraint/fk.sql
 psql -U postgres -d minas -f ./constraint/uk.sql
 
-@REM data
-psql -U postgres -d minas -f ./data/genero.sql
 
 @REM carga shapefile
-shp2pgsql -s 4326 -I ./archivos_SHP/MInas.shp minas.minas_point | psql -U postgres -d minas
+shp2pgsql -s 32618 -I ./archivos_SHP/MInas.shp minas.minas_point | psql -U postgres -d minas
 
 @REM poblar tablas normalizadas desde minas_point
 psql -U postgres -d minas -f ./data/genero.sql
